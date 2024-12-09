@@ -2,6 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from 'axios';
 
 //reducers handles state
+
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 const API_URL= `${backendUrl}/users`;
 // Login action
