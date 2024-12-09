@@ -26,7 +26,7 @@ const reviewRoutes = require("./routes/reviewRoutes");
 
 
 const app = express();
-const PORT = 3000;
+const PORT =  process.env.PORT || 3000;
 const dbURI= process.env.MONGO_URI;
 
 // Set Content Security Policy
@@ -56,10 +56,13 @@ mongoose.connect(dbURI).then(()=>{
 // app.use(cors(corsOptions)); 
 
 // app.use(express.json());
-app.use(cors({
-    origin:'http://localhost:3002',
-    credentials: true
-}));
+
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "http://localhost:3002",
+    credentials: true,
+  })
+);
  //app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
