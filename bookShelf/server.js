@@ -59,7 +59,7 @@ mongoose.connect(dbURI).then(()=>{
 
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL ,
+    origin: process.env.FRONTEND_URL || "http://localhost:3002"  ,
     credentials: true,
   })
 );
@@ -87,7 +87,8 @@ app.use('/api/reviews', reviewRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send({ message: 'Something went wrong!', error: err.message });
+        res.status(500).send({ message: 'Something went wrong!', error: err.message });
+
   });
 
 app.listen(PORT,(req,res)=>{
