@@ -1,8 +1,10 @@
-require("dotenv").config();
+
 import axios from "axios";
 
+const backendUrl =process.env.REACT_APP_BACKEND_URL;
+
 const axiosInstance = axios.create({
-    baseURL: process.env.REACT_APP_BACKEND_URL ,
+    baseURL: backendUrl,
     timeout: 20000,
 });
 
