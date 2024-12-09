@@ -33,7 +33,7 @@ const dbURI= process.env.MONGO_URI;
 app.use(helmet.contentSecurityPolicy({
     directives: {
         defaultSrc: ["'self'"], // Only allow resources from the same origin
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"], // Adjust as necessary
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'",'https://trusted-script-source.com'], // Adjust as necessary
         // Add other directives as needed
     },
 }));
@@ -87,7 +87,7 @@ app.use('/api/reviews', reviewRoutes);
 
 app.use((err, req, res, next) => {
     console.error(err.stack);
-    res.status(500).send('Something broke!');
+    res.status(500).send({ message: 'Something went wrong!', error: err.message });
   });
 
 app.listen(PORT,(req,res)=>{
