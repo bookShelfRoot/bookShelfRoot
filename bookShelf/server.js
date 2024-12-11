@@ -8,6 +8,14 @@ const passport = require("passport");
 const helmet = require("helmet");
 const path = require("path");
 
+const verifyToken = require("./middleware/verifyToken");
+//const verifyToken = require("./middleware/auth");
+const userRoutes = require("./routes/userRoutes");
+const bookRoutes = require('./routes/bookRoutes');
+const friendshipRoutes = require("./routes/friendshipRoutes");
+const reviewRoutes = require("./routes/reviewRoutes");
+
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
