@@ -29,14 +29,6 @@ const app = express();
 const PORT =  process.env.PORT || 3000;
 const dbURI= process.env.MONGO_URI;
 
-// Set Content Security Policy
-app.use(helmet.contentSecurityPolicy({
-    directives: {
-        defaultSrc: ["'self'"], // Only allow resources from the same origin
-        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'",'https://trusted-script-source.com'], // Adjust as necessary
-        // Add other directives as needed
-    },
-}));
 
 
 mongoose.connect(dbURI).then(()=>{
@@ -67,14 +59,26 @@ app.use(
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+
+// Set Content Security Policy
+app.use(helmet.contentSecurityPolicy({
+    directives: {
+        defaultSrc: ["'self'"], // Only allow resources from the same origin
+        scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'",'https://trusted-script-source.com'], // Adjust as necessary
+        // Add other directives as needed
+    },
+}));
+
 app.use(passport.initialize());
 //loading passport starategies by passing passport instatnce
 require("./passport")(passport);
-app.use('/api',verifyToken);
-
-
 //public routes
 app.use('/users',userRoutes);
+
+
+
+app.use('/api',verifyToken);
+
 //app.use('/api/books', passport.authenticate('jwt', { session: false }), bookRoutes);
 
 //protected routes
