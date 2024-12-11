@@ -56,5 +56,6 @@
   "proxy": "http://localhost:3000",
   "rules": {
     "no-unused-vars": "warn"
-  }
+  },
+  "homepage": "/"
 }
