@@ -6,6 +6,10 @@ const bodyParser= require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require("passport");
 const helmet= require("helmet");
+const path = require("path");
+
+//serve static files from the React build directory
+app.use(express.static(path.join(__dirname, "build")));
 // const expressJwt = require('jsonwebtoken');
 
 //const protectedRoute = expressJwt({ secret: 'your_jwt_secret', algorithms: ['HS256'] });
@@ -93,6 +97,12 @@ app.use((err, req, res, next) => {
     console.error(err.stack);
         res.status(500).send({ message: 'Something went wrong!', error: err.message });
 
+  });
+
+
+  // Fallback route for React (handles all frontend routes)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, "frontendBookShelf","build", "index.html"));
   });
 
 app.listen(PORT,(req,res)=>{
