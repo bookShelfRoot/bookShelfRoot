@@ -57,5 +57,12 @@
   "rules": {
     "no-unused-vars": "warn"
   },
-  "homepage": "/"
+  "homepage": "/",
+  
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/"
+      }
+    ]
 }
