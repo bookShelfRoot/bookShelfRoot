@@ -63,9 +63,9 @@ app.use((err, req, res, next) => {
   res.status(500).send({ message: 'Something went wrong!', error: err.message });
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, "frontendBookShelf", "build", "index.html"));
-});
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontendBookShelf/build', 'index.html'));
+  });
 
 app.listen(PORT, (req, res) => {
   console.log(`server on ${PORT}`)
