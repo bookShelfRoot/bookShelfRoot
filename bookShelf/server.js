@@ -47,12 +47,16 @@ app.use(helmet.contentSecurityPolicy({
 app.use(passport.initialize());
 
 require("./passport")(passport);
-
-app.use('/users', require("./routes/userRoutes"));
-app.use('/api', require("./routes/verifyToken"));
-app.use('/api/books', require("./routes/bookRoutes"));
-app.use('/api/friendships', require("./routes/friendshipRoutes"));
-app.use('/api/reviews', require("./routes/reviewRoutes"));
+app.use('/api',verifyToken);
+//public routes
+app.use('/users',userRoutes);
+//app.use('/api/books', passport.authenticate('jwt', { session: false }), bookRoutes);
+//protected routes
+// app.use('/api/books',verifyToken,bookRoutes);
+// app.use('/api/friendships', verifyToken, friendshipRoutes);
+app.use('/api/books', bookRoutes);
+app.use('/api/friendships', friendshipRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
