@@ -17,10 +17,25 @@ export const searchBooks = createApiAction(
     (query)=> axiosInstance.get(`/books/search/${query}`)
 )
 
-export const fetchBooks = createApiAction(
-    "books/fetchUserBooks",
-    () => axiosInstance.get("/books/user-books")
-  );
+// export const fetchBooks = createApiAction(
+//     "books/fetchUserBooks",
+//     () => axiosInstance.get("/books/user-books")
+//   );
+
+
+export const fetchBooks = createAsyncThunk(
+    "books/fetchBooks",
+    async () => {
+        const response = await axiosInstance.get("/books/user-books");
+        // Assuming the API returns an array of books
+        const userBooks = response.data.filter(book => !book.isFriendBook);
+        const friendsBooks = response.data.filter(book => book.isFriendBook);
+        return { userBooks, friendsBooks };
+    }
+);
+
+// Other action creators...
+
   
   export const fetchBookById = createApiAction(
     "books/fetchBookById",
@@ -88,19 +103,7 @@ export const fetchBooks = createApiAction(
 
 
 
-export const fetchCurrentBooks = createAsyncThunk(
-  'readingProgress/fetchCurrentBooks',
-  async (_, { rejectWithValue }) => {
-    try {
-      const response = await axiosInstance.get('books/currently-reading');
-      console.log('Api Response:', response.data);
-      return response.data || [];
-    } catch (error) {
-      console.error('API error', error);
-      return rejectWithValue(error.response?.data || 'Failed to fetch currently reading books');
-    }
-  }
-);
+
 
 export const fetchReadingProgress = createAsyncThunk(
   'readingProgress/fetchReadingProgress',
@@ -119,7 +122,8 @@ export const updateReadingProgress = createAsyncThunk(
   async ({ bookId, progress, comments }, { rejectWithValue }) => {
     try {
       const response = await axiosInstance.put(`books/progress/${bookId}`, { progress, comments });
-      return response.data;
+      // return response.data;
+      return { book: bookId, progress, comments };
     } catch (error) {
       return rejectWithValue(error.response?.data || 'Failed to update reading progress');
     }
@@ -128,9 +132,13 @@ export const updateReadingProgress = createAsyncThunk(
 
 export const markBookAsFinished = createAsyncThunk(
   'readingProgress/markBookAsFinished',
-  async (bookId, { rejectWithValue }) => {
+  async (bookId, { dispatch, rejectWithValue }) => {
     try {
       const response = await axiosInstance.put(`books/finish/${bookId}`);
+      
+      // Re-fetch finished books after marking as finished
+      dispatch(fetchFinishedBooks());
+
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || 'Failed to mark book as finished');
@@ -146,6 +154,19 @@ export const markBookAsCurrentlyReading = createAsyncThunk(
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response?.data || 'Failed to mark book as currently reading');
+    }
+  }
+);
+export const fetchCurrentBooks = createAsyncThunk(
+  'readingProgress/fetchCurrentBooks',
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await axiosInstance.get('books/currently-reading');
+      console.log('Api Response:', response.data);
+      return response.data || [];
+    } catch (error) {
+      console.error('API error', error);
+      return rejectWithValue(error.response?.data || 'Failed to fetch currently reading books');
     }
   }
 );
@@ -193,4 +214,44 @@ export const addFriendBookToUser = createAsyncThunk(
         }
     }
 );
+
+
+
+export const searchUserBooks = createAsyncThunk(
+    "books/searchUserBooks",
+    async (query) => {
+        const response = await axiosInstance.get(`/books/search/books/${query}`);
+        // Ensure that response.data contains userBooks and friendsBooks
+        return {
+            userBooks: Array.isArray(response.data.userBooks) ? response.data.userBooks : [],
+            friendsBooks: Array.isArray(response.data.friendsBooks) ? response.data.friendsBooks : []
+        };
+    }
+);
+
+
+export const fetchReadingProgressForCurrentBooks = createAsyncThunk(
+  'readingProgress/fetchReadingProgressForCurrentBooks',
+  async (_, { getState, dispatch }) => {
+    const currentlyReadingBooks = getState().books.currentlyReading;
+    const promises = currentlyReadingBooks.map((book) => dispatch(fetchReadingProgress(book._id)));
+    await Promise.all(promises); // Ensure all progress fetches are completed
+  }
+);
+
+// export const searchBooks = createAsyncThunk(
+//   "books/searchBooks",
+
+// )
+//   async (req, res) => {
+//     const query = req.params.query;
+//     try {
+//         const data = await api.searchBooks(query);
+//         res.json(data);
+//     } catch (error) {
+//         console.error('Error searching books:', error); // Log error details
+//         res.status(500).json({ message: 'Error searching books' });
+//     }
+// };
+
 

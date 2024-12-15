@@ -1,32 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchSocialUpdates } from '../../../actions/friendshipActions';
-import { likeReview, addComment } from '../../../actions/reviewActions';
-import './SocialUpdates.css';
+import './DashBoardSocialUpdates.css'; // Updated CSS filename
 
-const SocialUpdates = () => {
+const DashboardSocialUpdates = () => {
     const dispatch = useDispatch();
     const socialUpdates = useSelector((state) => state.friendships.socialUpdates) || [];
     const socialUpdatesLoading = useSelector((state) => state.friendships.socialUpdatesLoading);
     const error = useSelector((state) => state.friendships.error);
-    const [comments, setComments] = useState({});
 
     useEffect(() => {
         dispatch(fetchSocialUpdates());
     }, [dispatch]);
-
-    const handleLike = (reviewId) => {
-        dispatch(likeReview(reviewId));
-    };
-
-    const handleAddComment = (reviewId, comment) => {
-        dispatch(addComment({ reviewId, comment })).then(() => {
-            setComments(prevComments => ({
-                ...prevComments,
-                [reviewId]: [...(prevComments[reviewId] || []), { user: { username: 'You' }, comment }]
-            }));
-        });
-    };
 
     return (
         <div className="social-updates">
@@ -61,37 +46,6 @@ const SocialUpdates = () => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="update-actions">
-                                    <button className="like-button" onClick={() => handleLike(update._id)}>
-                                        👍 {update.likes.length}
-                                    </button>
-                                    <div className="comment-box">
-                                        <input 
-                                            type="text" 
-                                            placeholder="Add a comment..." 
-                                            onKeyDown={(e) => {
-                                                if (e.key === 'Enter') {
-                                                    handleAddComment(update._id, e.target.value);
-                                                    e.target.value = '';
-                                                }
-                                            }}
-                                            style={{ flexGrow: 1 }}
-                                        />
-                                        <button onClick={(e) => handleAddComment(update._id, e.target.previousSibling.value)}>
-                                            ➤
-                                        </button>
-                                    </div>
-                                </div>
-                                <div className="recent-comments">
-                                    {update.comments.slice(0, 1).map((comment, index) => (
-                                        <p key={index} className="comment">
-                                            <strong>{comment.user?.username}:</strong> {comment.comment}
-                                            {update.comments.length > 1 && (
-                                                <button className="read-more-comments">Read more comments</button>
-                                            )}
-                                        </p>
-                                    ))}
-                                </div>
                             </div>
                         )).reverse() // Reverse the updates to show the newest on top
                     )
@@ -102,4 +56,4 @@ const SocialUpdates = () => {
     );
 };
 
-export default SocialUpdates;
+export default DashboardSocialUpdates;

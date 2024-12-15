@@ -3,8 +3,7 @@ import axios from 'axios';
 
 //reducers handles state
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const API_URL= `${backendUrl}/users`;
+const API_URL= "http://localhost:3000/users";
 // Login action
 export const login = createAsyncThunk('users/login', async ({ email, password },{rejectWithValue}) => {
     try {

@@ -1,0 +1,15 @@
+.my-progress {
+    display: flex;
+    gap: 16px; /* Space between columns */
+    height: 100%;
+}
+
+.current-books-container,
+.finished-books-container {
+    flex: 1;
+    overflow-y: auto; /* Scrollable content */
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+}
