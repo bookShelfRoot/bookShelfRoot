@@ -5,7 +5,7 @@ import DashBoardFriendList from './DashBoardFriendList/DashBoardFriendList';
 import DashBoardSocialUpdates from './DashBoardSocialUpdates/DashBoardSocialUpdates.jsx';
 import Profile from './Profile/Profile';
 import DashBoardAddBook from './DashBoardAddBook/DashBoardAddBook.jsx';
-import './Dashboard.css';
+//import './Dashboard.css';
 
 const Dashboard = () => {
     const handleBookSelect = (book) => {
