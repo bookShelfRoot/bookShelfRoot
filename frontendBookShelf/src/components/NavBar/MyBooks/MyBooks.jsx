@@ -105,7 +105,7 @@ const MyBooks = () => {
                 {showAddBook ? 'Hide Add Book' : 'Add Book'}
               </button>
               {showAddBook && <AddBook />}
-              <BestSellers onSelectBook={handleSelectBook} />
+              <BestSellers onSelectBook={(book) => handleSelectBook({ ...book, source: 'bestSellers' })} />
             </div>
             <div className="column">
               <div className="large-column">
@@ -142,55 +142,68 @@ const MyBooks = () => {
         </div>
       </div>
       {selectedBook && (
-        <div className="selected-book">
-          <button className="close-button" onClick={handleClearSelection}>
-            X
-          </button>
-          <div className="selected-book-content">
-            <img
-              src={selectedBook.book_image || '/default-image.jpg'}
-              alt={selectedBook.title}
-            />
-            <div className="book-details">
-              <h4>{selectedBook.title}</h4>
-              <p>
-                <strong>Author:</strong> {selectedBook.author}
-              </p>
-              {selectedBook.finished ? (
-                <div>
-                  <p>
-                    <strong>Rating:</strong> {selectedBook.rating}
-                  </p>
-                  <p>
-                    <strong>Review:</strong> {selectedBook.review}
-                  </p>
-                </div>
-              ) : (
-                <div>
-                  <input
-                    type="number"
-                    value={progressInput}
-                    onChange={(e) => setProgressInput(e.target.value)}
-                    placeholder="Enter progress"
-                  />
-                  <textarea
-                    value={comments}
-                    onChange={(e) => setComments(e.target.value)}
-                    placeholder="Enter comments"
-                  />
-                  <button onClick={() => handleUpdateProgress(selectedBook._id, comments)}>
-                    Update Progress
-                  </button>
-                  <button onClick={() => handleMarkAsFinished(selectedBook._id)}>
-                    Mark as Finished
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-      <div className="navbar-container">
+  <div className="selected-book">
+    <button className="close-button" onClick={handleClearSelection}>
+      X
+    </button>
+    <div className="selected-book-content">
+      <img
+        src={selectedBook.book_image || '/default-image.jpg'}
+        alt={selectedBook.title}
+      />
+      <div className="book-details">
+        <h4>{selectedBook.title}</h4>
+        <p>
+          <strong>Author:</strong> {selectedBook.author}
+        </p>
+
+        {/* Conditional rendering for Best Sellers */}
+        {selectedBook.source === 'bestSellers' ? (
+          <p>{selectedBook.description}</p>
+        ) : (
+          <>
+            {selectedBook.finished ? (
+              <div>
+                <p>
+                  <strong>Rating:</strong> {selectedBook.rating}
+                </p>
+                <p>
+                  <strong>Review:</strong> {selectedBook.review}
+                </p>
+              </div>
+            ) : (
+              <div>
+                <input
+                  className="common"
+                  type="number"
+                  value={progressInput}
+                  onChange={(e) => setProgressInput(e.target.value)}
+                  placeholder="Enter progress"
+                />
+                <input
+                  className="common"
+                  value={comments}
+                  onChange={(e) => setComments(e.target.value)}
+                  placeholder="Enter comments"
+                />
+                <button
+                  className="common"
+                  onClick={() => handleUpdateProgress(selectedBook._id, comments)}
+                >
+                  Update Progress
+                </button>
+                <button onClick={() => handleMarkAsFinished(selectedBook._id)}>
+                  Mark as Finished
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  </div>
+)}
+      <div >
         <NavBar />
       </div>
     </div>
