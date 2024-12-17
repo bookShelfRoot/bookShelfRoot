@@ -12,6 +12,14 @@ The web-based application provides the following feature set:
   
 - **Social Cards**: Display updates/reviews/ratings from friends in a social card format, visible on the user's dashboard. along with all the friends books.
 
+
+## Development Repo's
+1. Backend Development repo
+ ```https://github.com/tejaGitH/bookShelf.git```
+ 2. Frontend Development repo
+```https://github.com/tejaGitH/frontendBookShelf.git```
+
+
 ## Installation
 1. Clone the repository and navigate bookShelfRoot
     ```bash
@@ -64,6 +72,10 @@ The web-based application provides the following feature set:
     ```bash
     npm start 
     ```
+
+
+
+
 
 ## Usage
 1. Open your browser and explore bookShelf on https://bookshelfroot1.onrender.com.
