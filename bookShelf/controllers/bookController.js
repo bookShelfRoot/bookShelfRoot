@@ -6,16 +6,18 @@ const Friendship = require('../models/Friendship');
 const mongoose = require('mongoose');
 
 
-const getBestSellers = async(req,res)=>{
-    const list= req.params.list;
-    try{
-        const data = await api.getBestSellers(list);
-        res.json(data);
-    }catch(error){
-        res.status(500).json({message:'error fetching best sellers',error:error.message});
-    }
-}
-
+const getBestSellers = async (req, res) => {
+  const list = req.params.list;
+  try {
+    console.log('Requesting best sellers for:', list);
+    const data = await api.getBestSellers(list);
+    console.log('Fetched data:', data);
+    res.json(data);
+  } catch (error) {
+    console.error('Error fetching best sellers:', error.response?.data || error.message);
+    res.status(500).json({ message: 'Error fetching best sellers', error: error.message });
+  }
+};
 const getBookDetails = async(req,res)=>{
     const isbn = req.params.isbn;
     console.log(isbn);

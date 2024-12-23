@@ -12,10 +12,10 @@ export const fetchBookDetails = createApiAction(
     (isbn)=> axiosInstance.get(`/books/book-details/${isbn}`)
 )
 
-export const searchBooks = createApiAction(
-    'books/searchBooks',
-    (query)=> axiosInstance.get(`/books/search/${query}`)
-)
+  export const searchBooks = createApiAction(
+      'books/searchBooks',
+      (query)=> axiosInstance.get(`/books/search/${query}`)
+  )
 
 // export const fetchBooks = createApiAction(
 //     "books/fetchUserBooks",
