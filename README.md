@@ -1,48 +1,78 @@
 # Bookshelf
 
-## Project Brief
-Bookshelf is a mini social network project for book lovers, allowing users to create and manage their own book collections with friends.
+## Project Overview
+Bookshelf is an  social networking application designed for book lovers, enabling users to create and manage their own book collections while connecting with friends. This platform fosters a community of readers, allowing them to share their reading experiences and discover new books through social interactions.
 
-## Feature Set
-The web-based application provides the following features:
-- **User Accounts**: Sign up and log in using credentials created during registration (authentication based on JWT).
-- **Dashboard**: When logged in, users can see the MyProgress section with currently reading and finished books, options to add books, and fetch friends and social updates.
-- **My Books**: Search and fetch books using a third-party API (NY Times Books API). Users can view all books, update their status (Currently Reading, Finished), and track progress.
-- **My Friends**: Fetch all available users to send requests, view pending requests, and see available friends.
-- **Social Cards**: Display updates, reviews, and ratings from friends in a social card format on the user's dashboard, along with all friends' books.
+## Key Features
 
-## Development Repositories
-1. Backend Development Repository:  
-   [https://github.com/tejaGitH/bookShelf.git](https://github.com/tejaGitH/bookShelf.git)
-   
-2. Frontend Development Repository:  
-   [https://github.com/tejaGitH/frontendBookShelf.git](https://github.com/tejaGitH/frontendBookShelf.git)
+- **User Authentication**: Secure sign-up and login using JWT (JSON Web Token) for authentication, ensuring safe user sessions.
+  
+- **Dynamic Dashboard**: Users can view their reading progress, including sections for currently reading and finished books, and have the ability to add new books and check social updates from friends.
+
+- **Book Management**: Search for books using a third-party API, manage collections by marking books as currently reading or finished, and update reading progress.
+
+- **Friendship Management**: Send friend requests, view pending requests, and manage friendships. Users can fetch all available friends and see real-time updates.
+
+- **Social Interaction**: Display updates, reviews, and ratings from friends in social cards on the user's dashboard, fostering community engagement.
+
+## Technologies Used
+
+- **Frontend**: React.js for building the user interface.
+- **Backend**: Node.js with Express for server-side logic.
+- **Database**: MongoDB for data storage.
+- **State Management**: Redux Toolkit for managing application state.
+- **API Integration**: Axios for handling HTTP requests.
+- **Authentication**: JSON Web Tokens (JWT) for secure user authentication.
+
+
+
+# Checkout and Start the Development Server
+
+Follow these steps to set up and run the development server:
+
+1. **Copy the Script**  
+   Copy the `bookShelf.sh` file into the `bookShelfRoot` / `bookShelf`  / `frontendBookShelf` repository.
+
+2. **Save the Script**  
+   Save the file with the name `bookShelf.sh` ( desired name).
+
+3. **Make the Script Executable**  
+   Run the following command in your terminal to grant execute permissions:  
+   ```
+
+   chmod +x bookShelf.sh
+    
+4. **Run the Script**
+    Execute the script to start the serve
+    ```
+
+    ./bookShelf.sh
+    
+    
+5. **Access the Server**
+    Once the Script complete, you can access bookShelf at <b>http://localhost:3002</b> ....!  
 
 ## Installation
 
-1. Clone the repository and navigate to `bookShelfRoot`:
-    ```
-    git clone https://github.com/bookShelfRoot/bookShelfRoot.git
-    cd bookShelfRoot
-    ```
-
 ### Backend
-
+1. Clone the repository:
+    ```
+    git clone https://github.com/tejaGitH/bookShelf.git 
+    ```
 2. Navigate to the backend directory:
     ```
     cd bookshelf
     ```
 3. Install dependencies:
     ```
-    npm install --save
+    npm install
     ```
-4. Set up environment variables. Create a `.env` file in the backend directory and add the required variables:
+4. Set up environment variables in a `.env` file:
     ```
-    MONGO_URI='mongodb+srv://navyateja:navyateja@cluster0.tkjaz.mongodb.net/bookShelf'
-    SECRET_KEY='teja@12345'
-    NYT_API_KEY='cUdTW6wVvh2Ve1733GYPO8xRIwy1UXFl'
-    NYT_API_SECRET='LkC2iAXfMJlgHPRn'
-    FRONTEND_URL='https://bookshelfroot1.onrender.com'
+    MONGO_URI='your_mongo_uri'
+    SECRET_KEY='your_secret_key'
+    NYT_API_KEY='your_nyt_api_key'
+    NYT_API_SECRET='your_nyt_api_secret'
     ```
 5. Start the backend server:
     ```
@@ -50,41 +80,37 @@ The web-based application provides the following features:
     ```
 
 ### Frontend
-
-1. Navigate to the frontend directory:
+1. Clone the repository:
+    ```
+    git clone https://github.com/tejaGitH/frontendBookShelf.git 
+    ```
+2. Navigate to the frontend directory:
     ```
     cd frontendBookShelf
     ```
-2. Install dependencies:
+3. Install dependencies:
     ```
-    npm install --save
+    npm install
     ```
-3. Set up environment variables. Create a `.env` file in the frontend directory and add the required variables:
+4. Start the frontend server:
     ```
-    BACKEND_URL='https://bookshelfroot.onrender.com'
-    ```
-4. Navigate to the `src` directory:
-    ```
-    cd src
-    ```
-
-5. Start the frontend server:
-    ```
-    npm start 
+    PORT=3002 npm start 
     ```
 
 ## Usage
 
-1. Open your browser and explore Bookshelf at [https://bookshelfroot1.onrender.com](https://bookshelfroot1.onrender.com).
+1. Open your browser and go to `http://localhost:3002` for the frontend and `http://localhost:3000` for the backend.
 2. Sign up or log in using your email ID and password.
 3. Explore the My Bookshelf section to search, add, and review books.
-4. Check your Dashboard to see currently reading books, update progress, and view social cards with friends' updates.
+4. Check your Dashboard for currently reading books, update progress, and view social cards with friends' updates.
 
 ## Project Structure
 
 ### Backend Structure
 
+### Backend
 ```plaintext
+
 backend/
 ├── controllers/
 │   ├── userController.js
@@ -169,3 +195,16 @@ frontend/
 │   └── App.css
 ├── .env
 └── package.json
+
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a pull request or open an issue if you find any bugs or have suggestions for improvements.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+Bookshelf is designed to create a vibrant community of readers who can share their journeys and recommendations in a friendly environment. Join us in building a platform that celebrates literature!
