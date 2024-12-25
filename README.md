@@ -29,6 +29,7 @@ Bookshelf is an  social networking application designed for book lovers, enablin
 # Checkout and Start the Development Server
 
 Follow these steps to set up and run the development server:
+**NOTE: make sure PORTS `3002`,`3000` are available & `npm`/`node` installed
 
 1. **Copy the Script**  
    Copy the `bookShelf.sh` file from the `bookShelfRoot` / `bookShelf`  / `frontendBookShelf` repository.
