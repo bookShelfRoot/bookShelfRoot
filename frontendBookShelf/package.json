@@ -14,7 +14,7 @@
     "bootstrap": "^5.3.3",
     "js-cookie": "^3.0.5",
     "react": "^18.3.1",
-    "react-bootstrap": "^2.10.5",
+    "react-bootstrap": "^2.10.7",
     "react-dom": "^18.3.1",
     "react-paginate": "^8.2.0",
     "react-redux": "^9.1.2",
@@ -25,8 +25,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "PORT=3002 react-scripts start",
-    "build": "CI=false react-scripts build",
+    "start": "set PORT=3002 && react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -49,20 +49,6 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "babel-eslint": "^10.1.0",
-    "dotenv-webpack": "^8.1.0"
-  },
-  "proxy": "http://localhost:3000",
-  "rules": {
-    "no-unused-vars": "warn"
-  },
-  "homepage": "/",
-  
-    "rewrites": [
-      {
-        "source": "/(.*)",
-        "destination": "/"
-      }
-    ]
+    "babel-eslint": "^10.1.0"
+  }
 }
