@@ -82,14 +82,14 @@ const UserBooks = () => {
             />
 
             {/* Loading State */}
-            {loading && <p>Loading...</p>}
+            {/* {loading && <p>Loading...</p>} */}
 
             {/* Error Message Display */}
-            {showError && error && (
+            {/* {showError && error && (
                 <div className="error-message">
                     Error: {typeof error === "string" ? error : "fetching NYT api data"}
                 </div>
-            )}
+            )} */}
 
             {/* Books List */}
             <div className="books-list">
