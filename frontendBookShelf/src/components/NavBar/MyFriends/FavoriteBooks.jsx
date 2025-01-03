@@ -20,9 +20,9 @@ const FavoriteBooks = () => {
         return <div>Loading favorite books...</div>;
     }
 
-    if (error) {
-        return <div>Error: {error}</div>;
-    }
+    // if (error) {
+    //     return <div>Error: {error}</div>;
+    // }
 
     return (
         <div className="favorite-books">
